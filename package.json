@@ -1,0 +1,17 @@
+{
+  "name": "cleanupini",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "filehound": "^1.17.4",
+    "readline": "^1.3.0",
+    "split2": "^3.2.2",
+    "underscore": "^1.13.6"
+  }
+}
