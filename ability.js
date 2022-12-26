@@ -12,7 +12,7 @@ void (async () => {
     ini_files.each(async function (file) {
         if (!file.match(/ability/)) return;
 
-        var str = []; var prop = {}; var ml_context; var description = [];
+        var str = []; var prop = {}; var context; var description = [];
 
         const rl = readline.createInterface({
             input: fs.createReadStream(file),
@@ -44,92 +44,92 @@ void (async () => {
             else if (line.match(/^Hotkey =/)) {
                 prop["hotkey"] = line.match(/= \"(.*)?\"/)[1];
             }
-            else if (line.match(/BuffID =/) || ml_context === "buff_id") {
-                if (line.match(/= {/)) ml_context = "buff_id";
-                else if (ml_context === "buff_id") {
-                    prop[ml_context] = line.match(/\"(.*)?\"/)[1];
-                    ml_context = "";
+            else if (line.match(/BuffID =/) || context === "buff_id") {
+                if (line.match(/= {/)) context = "buff_id";
+                else if (context === "buff_id") {
+                    prop[context] = line.match(/\"(.*)?\"/)[1];
+                    context = "";
                 }
                 else prop["buff_id"] = line.match(/\"(.*)?\"/)[1];
             }
             else if (line.match(/^Tip =/)) {
                 if (!line.match(/\|c[0-9a-z]{2}/i)) return;
 
-                if (line.match(/= {/)) ml_context = "color";
-                else if (ml_context === "color") {
-                    prop[ml_context] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})/)[2];
-                    ml_context = "";
+                if (line.match(/= {/)) context = "color";
+                else if (context === "color") {
+                    prop[context] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})/)[2];
+                    context = "";
                 }
                 else prop["color"] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})/)[2];
             }
-            else if (line.match(/-- Armor Bonus/) || ["armor_bonus"].includes(ml_context)) {
-                if (line.match(/-- /)) ml_context = "armor_bonus";
+            else if (line.match(/-- Armor Bonus/) || ["armor_bonus"].includes(context)) {
+                if (line.match(/-- /)) context = "armor_bonus";
                 else {
-                    prop[ml_context] = convertFloat(line.match(/= (.*)?/)[1]);
-                    ml_context = "";
+                    prop[context] = convertFloat(line.match(/= (.*)?/)[1]);
+                    context = "";
                 }
             }
-            else if (line.match(/-- Chance to Critical Strike/) || ["crit_chance"].includes(ml_context)) {
-                if (line.match(/-- /)) ml_context = "crit_chance";
+            else if (line.match(/-- Chance to Critical Strike/) || ["crit_chance"].includes(context)) {
+                if (line.match(/-- /)) context = "crit_chance";
                 else {
-                    prop[ml_context] = convertFloat(line.match(/= (.*)?/)[1]);
-                    ml_context = "";
+                    prop[context] = convertFloat(line.match(/= (.*)?/)[1]);
+                    context = "";
                 }
             }
-            else if (line.match(/-- Damage Multiplier/) || ["crit_multiplier"].includes(ml_context)) {
-                if (line.match(/-- /)) ml_context = "crit_multiplier";
+            else if (line.match(/-- Damage Multiplier/) || ["crit_multiplier"].includes(context)) {
+                if (line.match(/-- /)) context = "crit_multiplier";
                 else {
-                    prop[ml_context] = convertFloat(line.match(/= (.*)?/)[1]);
-                    ml_context = "";
+                    prop[context] = convertFloat(line.match(/= (.*)?/)[1]);
+                    context = "";
                 }
             }
-            else if (line.match(/-- Chance to Evade/) || ["evade_chance"].includes(ml_context)) {
-                if (line.match(/-- /)) ml_context = "evade_chance";
+            else if (line.match(/-- Chance to Evade/) || ["evade_chance"].includes(context)) {
+                if (line.match(/-- /)) context = "evade_chance";
                 else {
-                    prop[ml_context] = convertFloat(line.match(/= (.*)?/)[1]);
-                    ml_context = "";
+                    prop[context] = convertFloat(line.match(/= (.*)?/)[1]);
+                    context = "";
                 }
             }
-            else if (line.match(/-- Attack Speed/) || ["attack_speed_factor", "attack_speed_increase", "attack_speed_reduction"].includes(ml_context)) {
+            else if (line.match(/-- Attack Speed/) || ["attack_speed_factor", "attack_speed_increase", "attack_speed_reduction"].includes(context)) {
                 if (line.match(/-- /)) {
-                    if (line.match(/Increase (%)/)) ml_context = "attack_speed_increase";
-                    else if (line.match(/Reduction (%)/)) ml_context = "attack_speed_reduction";
-                    else ml_context = "attack_speed_factor";
+                    if (line.match(/Increase (%)/)) context = "attack_speed_increase";
+                    else if (line.match(/Reduction (%)/)) context = "attack_speed_reduction";
+                    else context = "attack_speed_factor";
                 }
                 else {
-                    prop[ml_context] = line.match(/= (.*)?/)[1];
-                    ml_context = "";
+                    prop[context] = line.match(/= (.*)?/)[1];
+                    context = "";
                 }
             }
-            else if (line.match(/-- Movement Speed/) || ["movement_speed_factor", "movement_speed_increase", "movement_speed_reduction"].includes(ml_context)) {
+            else if (line.match(/-- Movement Speed/) || ["movement_speed_factor", "movement_speed_increase", "movement_speed_reduction"].includes(context)) {
                 if (line.match(/-- /)) {
-                    if (line.match(/Increase (%)/)) ml_context = "movement_speed_increase";
-                    else if (line.match(/Reduction (%)/)) ml_context = "movement_speed_reduction";
-                    else ml_context = "movement_speed_factor";
+                    if (line.match(/Increase (%)/)) context = "movement_speed_increase";
+                    else if (line.match(/Reduction (%)/)) context = "movement_speed_reduction";
+                    else context = "movement_speed_factor";
                 }
                 else {
-                    prop[ml_context] = line.match(/= (.*)?/)[1];
-                    ml_context = "";
+                    prop[context] = line.match(/= (.*)?/)[1];
+                    context = "";
                 }
             }
-            else if (line.match(/-- Chance to Critical Strike/) || ["crit_chance"].includes(ml_context)) {
-                if (line.match(/-- /)) ml_context = "crit_chance";
+            else if (line.match(/-- Chance to Critical Strike/) || ["crit_chance"].includes(context)) {
+                if (line.match(/-- /)) context = "crit_chance";
                 else {
-                    prop[ml_context] = convertFloat(line.match(/= (.*)?/)[1]);
-                    ml_context = "";
+                    prop[context] = convertFloat(line.match(/= (.*)?/)[1]);
+                    context = "";
                 }
             }
-            else if (line.match(/Ubertip =/) || ml_context === "description") {
+            else if (line.match(/Ubertip =/) || context === "description") {
                 if (line.match(/Ubertip = \"\"/)) return;
-                if (line.match(/= {|= \[=\[/)) ml_context = "description";
-                else if (ml_context === "description") {
+                if (line.match(/= {|= \[=\[/)) context = "description";
+                else if (context === "description") {
                     if (!line) return;
-                    if (line.match(/-- /)) ml_context = "";
+                    if (line.match(/-- /)) context = "";
                     else description.push(line.replace(/\|c[0-9a-z]{8}|\]=\]|\[=\[|\|r|\}|∴/g, ''));
                 }
                 else {
                     description.push(line.match(/= \"(.*)?\"/)[1]);
-                    ml_context = "";
+                    context = "";
                 }
             }
 
@@ -137,11 +137,9 @@ void (async () => {
                 prop["description"] = _.uniq(description);
                 if (!prop["description"].length) delete prop["description"];
                 str.push(prop);
-                description = [];
-                prop = {};
+                description = []; prop = {};
             }
         });
-
 
         await new Promise((res) => rl.once('close', res));
 

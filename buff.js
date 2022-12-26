@@ -12,7 +12,7 @@ void (async () => {
     ini_files.each(async function (file) {
         if (!file.match(/buff/)) return;
 
-        var str = []; var prop = {}; var ml_context; var description = [];
+        var str = []; var prop = {}; var context; var description = [];
 
         const rl = readline.createInterface({
             input: fs.createReadStream(file),
@@ -33,17 +33,17 @@ void (async () => {
             else if (line.match(/^Buffart =/)) {
                 prop["icon"] = line.match(/= \"(.*)?\"/)[1];
             }
-            else if (line.match(/Buffubertip = /) || ml_context === "description") {
+            else if (line.match(/Buffubertip = /) || context === "description") {
                 if (line.match(/Buffubertip = \"\"/)) return;
-                if (line.match(/= {|= \[=\[/)) ml_context = "description";
-                else if (ml_context === "description") {
+                if (line.match(/= {|= \[=\[/)) context = "description";
+                else if (context === "description") {
                     if (!line) return;
-                    if (line.match(/-- /)) ml_context = "";
+                    if (line.match(/-- /)) context = "";
                     else description.push(line.replace(/\|c[0-9a-z]{8}|\]=\]|\[=\[|\|r|\}|∴/g, ''));
                 }
                 else {
                     description.push(line.match(/= \"(.*)?\"/)[1]);
-                    ml_context = "";
+                    context = "";
                 }
             }
 
@@ -51,11 +51,9 @@ void (async () => {
                 prop["description"] = _.uniq(description);
                 if (!prop["description"].length) delete prop["description"];
                 str.push(prop);
-                description = [];
-                prop = {};
+                description = []; prop = {};
             }
         });
-
 
         await new Promise((res) => rl.once('close', res));
 

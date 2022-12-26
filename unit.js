@@ -12,7 +12,7 @@ void (async () => {
     ini_files.each(async function (file) {
         if (!file.match(/unit/)) return;
 
-        var str = []; var prop = {}; var ml_context; var description = [];
+        var str = []; var prop = {}; var description = [];
 
         const rl = readline.createInterface({
             input: fs.createReadStream(file),
@@ -68,8 +68,7 @@ void (async () => {
                 prop["description"] = _.uniq(description);
                 if (!prop["description"].length) delete prop["description"];
                 str.push(prop);
-                description = [];
-                prop = {};
+                description = []; prop = {};
             }
         });
 

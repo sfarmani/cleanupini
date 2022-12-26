@@ -13,10 +13,8 @@ void (async () => {
 
     ini_files.each(async function (file) {
         if (!file.match(/item/)) return;
-        // add art icon
 
-        var str = []; var id; var name; var rank; var color; var grade = 0; var level; var type; var stats = {}; var next_is_desc = false;
-        var description;
+        var str = []; var prop = {}; var stats = {}; var context;
 
         const rl = readline.createInterface({
             input: fs.createReadStream(file),
@@ -25,31 +23,34 @@ void (async () => {
 
         rl.on('line', function (line) {
             if (line.match(/^\[[a-zA-Z0-9]{4}\]$/i)) {
-                id = line.replace(/\[|\]/g, '');
+                prop["id"] = line.replace(/\[|\]/g, '');
             }
             else if (line.match(/Name = /)) {
                 if (line.match(/\|c[0-9a-z]{2}/i)) {
-                    name = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[3];
-                    color = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[2];
+                    prop["name"] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[3];
+                    prop["color"] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[2];
                 }
-                else name = line.match(/\"(.*)?\"/)[1];
+                else prop["name"] = line.match(/\"(.*)?\"/)[1];
             }
             else if (line.match(/\[(Epic|Normal|Magic|Rare)\]/)) {
-                rank = line.match(/(\[(Epic|Normal|Magic|Rare)\])/)[1];
+                prop["rank"] = line.match(/(\[(Epic|Normal|Magic|Rare)\])/)[1];
+            }
+            else if (line.match(/^Art =/)) {
+                prop["icon"] = line.match(/= \"(.*)?\"/)[1];
             }
             else if (line.match(/\|r Grade /)) {
-                next_is_desc = true;
-                if (line.match(/Deltirama/)) grade = 1;
-                if (line.match(/Neptinos/)) grade = 2;
-                if (line.match(/Gnosis/)) grade = 3;
-                if (line.match(/Alteia/)) grade = 4;
-                if (line.match(/Arcana/)) grade = 5;
+                context = "description";
+                if (line.match(/Deltirama/)) prop["grade"] = 1;
+                if (line.match(/Neptinos/)) prop["grade"] = 2;
+                if (line.match(/Gnosis/)) prop["grade"] = 3;
+                if (line.match(/Alteia/)) prop["grade"] = 4;
+                if (line.match(/Arcana/)) prop["grade"] = 5;
 
-                type = line.match(/Grade (.*)? -/)[1];
+                prop["type"] = line.match(/Grade (.*)? -/)[1];
             }
-            else if (next_is_desc) {
-                description = line.match(/(\|c[0-9a-z]{8}∴)?(.*)?/)[2];
-                next_is_desc = false;
+            else if (context === "description") {
+                prop["description"] = line.match(/(.*)?/)[1].replace(/\|c[0-9a-z]{8}/g, '');
+                context = "";
             }
             else if (line.match(/\|c0040e0d0∴|\|c00adff2f◎/)) {
                 if (!line.match(/Lv\./i)) {
@@ -58,7 +59,7 @@ void (async () => {
                 }
             }
             else if (line.match(/Lv\./i)) {
-                level = line.match(/Lv\.\s?(\d+)/i)[1];
+                prop["level"] = line.match(/Lv\.\s?(\d+)/i)[1];
             }
             else if (line.match(stat_regex)) {
                 if (line.match(/∴Damage ((\+|-)[\d\W]+)/)) stats["damage"] = line.match(/∴Damage ((\+|-)[\d\W]+)/)[1];
@@ -100,11 +101,11 @@ void (async () => {
             if (!line) {
                 stats["activepassive"] = _.uniq(stats["activepassive"]);
                 if (!stats["activepassive"].length) delete stats["activepassive"];
-                str.push({ "id": id, "name": name, "rank": rank, "grade": grade, "type": type, "color": color, "level": level, "stats": [stats] });
-                stats = {};
+                prop["stats"] = stats;
+                str.push(prop);
+                prop = {}; stats = {};
             }
         });
-
 
         await new Promise((res) => rl.once('close', res));
 
