@@ -42,6 +42,9 @@ void (async () => {
             else if (line.match(/^HP =/)) {
                 prop["starting_hp"] = convertFloat(line.match(/= (.*)?/)[1]);
             }
+            else if (line.match(/^level =/)) {
+                prop["level"] = convertFloat(line.match(/= (.*)?/)[1]);
+            }
             else if (line.match(/^Primary =/)) {
                 prop["primary_stat"] = line.match(/= \"(.*)?\"/)[1];
             }
