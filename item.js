@@ -62,40 +62,40 @@ void (async () => {
                 prop["level"] = line.match(/Lv\.\s?(\d+)/i)[1];
             }
             else if (line.match(stat_regex)) {
-                if (line.match(/∴Damage ((\+|-)[\d\W]+)/)) stats["damage"] = line.match(/∴Damage ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Auto-attack Damage ((\+|-)[\d\W]+)/)) stats["aadamagepercent"] = line.match(/Auto-attack Damage ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Armor ((\+|-)[\d\W]+)/)) stats["armor"] = line.match(/Armor ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Main Stat ((\+|-)[\d\W]+)/)) stats["mainstat"] = line.match(/Main Stat ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/All Stats ((\+|-)[\d\W]+)/)) stats["allstat"] = line.match(/All Stats ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/STR ((\+|-)[\d\W]+)/)) stats["str"] = line.match(/STR ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/AGI ((\+|-)[\d\W]+)/)) stats["agi"] = line.match(/AGI ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/INT ((\+|-)[\d\W]+)/)) stats["int"] = line.match(/INT ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/HP ((\+|-)[\d\W]+)/)) stats["hp"] = line.match(/HP ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/MP ((\+|-)[\d\W]+)/)) stats["mp"] = line.match(/MP ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Attack Speed ((\+|-)[\d\W]+)/)) stats["attackspeedpercent"] = line.match(/Attack Speed ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Movement Speed ((\+|-)(\b\d+(?:[\.,]\d+)?\b(?!(?:[\.,]\d+)|(?:\s*(?:%)))))/)) stats["movespeed"] = line.match(/Movement Speed ((\+|-)(\b\d+(?:[\.,]\d+)?\b(?!(?:[\.,]\d+)|(?:\s*(?:%)))))/)[1];
-                if (line.match(/Movement Speed ((\+|-)\d+(\%))/)) stats["movespeedpercent"] = line.match(/Movement Speed ((\+|-)\d+(\%))/)[1];
-                if (line.match(/Dodge Chance ((\+|-)[\d\W]+)/)) stats["dodgechancepercent"] = line.match(/Dodge Chance ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Skill Damage ((\+|-)[\d\W]+)/)) stats["skilldamagepercent"] = line.match(/Skill Damage ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Crit Chance ((\+|-)[\d\W]+)/)) stats["critchancepercent"] = line.match(/Crit Chance ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Crit Multiplier ((\+|-)[\d\W]+)/)) stats["critmultiplier"] = line.match(/Crit Multiplier ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Periodic Damage ((\+|-)[\d\W]+)/)) stats["periodicdamagepercent"] = line.match(/Periodic Damage ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Magic Defense ((\+|-)[\d\W]+)/)) stats["mdpercent"] = line.match(/Magic Defense ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Damage Reduction ((\+|-)[\d\W]+)/)) stats["drpercent"] = line.match(/Damage Reduction ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Damage Taken ((\+|-)[\d\W]+)/)) stats["dtpercent"] = line.match(/Damage Taken ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Damage Taken ((\+|-)(\b\d+(?:[\.,]\d+)?\b(?!(?:[\.,]\d+)|(?:\s*(?:%)))))/)) stats["dt"] = line.match(/Damage Taken ((\+|-)(\b\d+(?:[\.,]\d+)?\b(?!(?:[\.,]\d+)|(?:\s*(?:%)))))/)[1];
-                if (line.match(/Damage Dealt ((\+|-)[\d\W]+)/)) stats["damagedealtpercent"] = line.match(/Damage Dealt ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Healing Done ((\+|-)[\d\W]+)/)) stats["healingpercent"] = line.match(/Healing Done ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Healing Received ((\+|-)[\d\W]+)/)) stats["healreceivedpercent"] = line.match(/Healing Received ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/HP Regen ((\+|-)[\d\W]+)/)) stats["hpregen"] = line.match(/HP regen ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/MP Regen ((\+|-)[\d\W]+)/)) stats["mpregen"] = line.match(/MP regen ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/(Water|Ice|Water\/Ice) Affinity ((\+|-)[\d\W]+)/)) stats["affinityiwpercent"] = line.match(/(Water|Ice|Water\/Ice) Affinity ((\+|-)[\d\W]+)/)[2];
-                if (line.match(/Flame Affinity ((\+|-)[\d\W]+)/)) stats["affinityflamepercent"] = line.match(/Flame Affinity ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Earth Affinity ((\+|-)[\d\W]+)/)) stats["affinityearthpercent"] = line.match(/Earth Affinity ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Wind Affinity ((\+|-)[\d\W]+)/)) stats["affinitywlpercent"] = line.match(/Wind Affinity ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Light Affinity ((\+|-)[\d\W]+)/)) stats["affinitylightpercent"] = line.match(/Light Affinity ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Dark Affinity ((\+|-)[\d\W]+)/)) stats["affinitydarkpercent"] = line.match(/Dark Affinity ((\+|-)[\d\W]+)/)[1];
-                if (line.match(/Revival Time ((\+|-)[\d\W]+)/)) stats["revivaltimepercent"] = line.match(/Revival Time ((\+|-)[\d\W]+)/)[1];
+                if (line.match(/∴Damage ((\+|-)[\d\W]+)/)) stats["damage"] = parseToNumber(line.match(/∴Damage ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Auto-attack Damage ((\+|-)[\d\W]+)/)) stats["aadamagepercent"] = parseToPercent(line.match(/Auto-attack Damage ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Armor ((\+|-)[\d\W]+)/)) stats["armor"] = parseToNumber(line.match(/Armor ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Main Stat ((\+|-)[\d\W]+)/)) stats["mainstat"] = parseToNumber(line.match(/Main Stat ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/All Stats ((\+|-)[\d\W]+)/)) stats["allstat"] = parseToNumber(line.match(/All Stats ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/STR ((\+|-)[\d\W]+)/)) stats["str"] = parseToNumber(line.match(/STR ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/AGI ((\+|-)[\d\W]+)/)) stats["agi"] = parseToNumber(line.match(/AGI ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/INT ((\+|-)[\d\W]+)/)) stats["int"] = parseToNumber(line.match(/INT ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/HP ((\+|-)[\d\W]+)/)) stats["hp"] = parseToNumber(line.match(/HP ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/MP ((\+|-)[\d\W]+)/)) stats["mp"] = parseToNumber(line.match(/MP ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Attack Speed ((\+|-)[\d\W]+)/)) stats["attackspeedpercent"] = parseToPercent(line.match(/Attack Speed ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Movement Speed ((\+|-)(\b\d+(?:[\.,]\d+)?\b(?!(?:[\.,]\d+)|(?:\s*(?:%)))))/)) stats["movespeed"] = parseToNumber(line.match(/Movement Speed ((\+|-)(\b\d+(?:[\.,]\d+)?\b(?!(?:[\.,]\d+)|(?:\s*(?:%)))))/)[1]);
+                if (line.match(/Movement Speed ((\+|-)\d+(\%))/)) stats["movespeedpercent"] = parseToPercent(line.match(/Movement Speed ((\+|-)\d+(\%))/)[1]);
+                if (line.match(/Dodge Chance ((\+|-)[\d\W]+)/)) stats["dodgechancepercent"] = parseToPercent(line.match(/Dodge Chance ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Skill Damage ((\+|-)[\d\W]+)/)) stats["skilldamagepercent"] = parseToPercent(line.match(/Skill Damage ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Crit Chance ((\+|-)[\d\W]+)/)) stats["critchancepercent"] = parseToPercent(line.match(/Crit Chance ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Crit Multiplier ((\+|-)[\d\W]+)/)) stats["critmultiplier"] = parseToNumber(line.match(/Crit Multiplier ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Periodic Damage ((\+|-)[\d\W]+)/)) stats["periodicdamagepercent"] = parseToPercent(line.match(/Periodic Damage ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Magic Defense ((\+|-)[\d\W]+)/)) stats["mdpercent"] = parseToPercent(line.match(/Magic Defense ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Damage Reduction ((\+|-)[\d\W]+)/)) stats["drpercent"] = parseToPercent(line.match(/Damage Reduction ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Damage Taken ((\+|-)[\d\W]+)/)) stats["dtpercent"] = parseToPercent(line.match(/Damage Taken ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Damage Taken ((\+|-)(\b\d+(?:[\.,]\d+)?\b(?!(?:[\.,]\d+)|(?:\s*(?:%)))))/)) stats["dt"] = parseToNumber(line.match(/Damage Taken ((\+|-)(\b\d+(?:[\.,]\d+)?\b(?!(?:[\.,]\d+)|(?:\s*(?:%)))))/)[1]);
+                if (line.match(/Damage Dealt ((\+|-)[\d\W]+)/)) stats["damagedealtpercent"] = parseToPercent(line.match(/Damage Dealt ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Healing Done ((\+|-)[\d\W]+)/)) stats["healingpercent"] = parseToPercent(line.match(/Healing Done ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Healing Received ((\+|-)[\d\W]+)/)) stats["healreceivedpercent"] = parseToPercent(line.match(/Healing Received ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/HP Regen ((\+|-)[\d\W]+)/)) stats["hpregen"] = parseToNumber(line.match(/HP Regen ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/MP Regen ((\+|-)[\d\W]+)/)) stats["mpregen"] = parseToNumber(line.match(/MP Regen ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/(Water|Ice|Water\/Ice) Affinity ((\+|-)[\d\W]+)/)) stats["affinityiwpercent"] = parseToPercent(line.match(/(Water|Ice|Water\/Ice) Affinity ((\+|-)[\d\W]+)/)[2]);
+                if (line.match(/Flame Affinity ((\+|-)[\d\W]+)/)) stats["affinityflamepercent"] = parseToPercent(line.match(/Flame Affinity ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Earth Affinity ((\+|-)[\d\W]+)/)) stats["affinityearthpercent"] = parseToPercent(line.match(/Earth Affinity ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Wind Affinity ((\+|-)[\d\W]+)/)) stats["affinitywlpercent"] = parseToPercent(line.match(/Wind Affinity ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Light Affinity ((\+|-)[\d\W]+)/)) stats["affinitylightpercent"] = parseToPercent(line.match(/Light Affinity ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Dark Affinity ((\+|-)[\d\W]+)/)) stats["affinitydarkpercent"] = parseToPercent(line.match(/Dark Affinity ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Revival Time ((\+|-)[\d\W]+)/)) stats["revivaltimepercent"] = parseToPercent(line.match(/Revival Time ((\+|-)[\d\W]+)/)[1]);
             }
 
             if (!line) {
@@ -112,3 +112,11 @@ void (async () => {
         fs.writeFileSync(file.replace(/.ini/, '.json'), JSON.stringify(str, null, 4));
     });
 })();
+
+function parseToNumber(str) {
+    return parseFloat(str.replace(/\+/, ""));
+}
+
+function parseToPercent(str) {
+    return parseFloat(str.replace(/\+/, "")) / 100;
+}
