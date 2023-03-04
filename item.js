@@ -62,7 +62,7 @@ void (async () => {
                 prop["level"] = line.match(/Lv\.\s?(\d+)/i)[1];
             }
             else if (line.match(stat_regex)) {
-                if (line.match(/∴Damage ((\+|-)[\d\W]+)/)) stats["damage"] = parseToNumber(line.match(/∴Damage ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/∴(Attack Damage|Damage) ((\+|-)[\d\W]+)/)) stats["damage"] = parseToNumber(line.match(/∴(Attack Damage|Damage) ((\+|-)[\d\W]+)/)[2]);
                 if (line.match(/Auto-attack Damage ((\+|-)[\d\W]+)/)) stats["aadamagepercent"] = parseToPercent(line.match(/Auto-attack Damage ((\+|-)[\d\W]+)/)[1]);
                 if (line.match(/Armor ((\+|-)[\d\W]+)/)) stats["armor"] = parseToNumber(line.match(/Armor ((\+|-)[\d\W]+)/)[1]);
                 if (line.match(/Main Stat ((\+|-)[\d\W]+)/)) stats["mainstat"] = parseToNumber(line.match(/Main Stat ((\+|-)[\d\W]+)/)[1]);
