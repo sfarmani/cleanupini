@@ -94,7 +94,7 @@ void (async () => {
                 if (line.match(/Earth Affinity ((\+|-)[\d\W]+)/)) stats["affinityearthpercent"] = parseToPercent(line.match(/Earth Affinity ((\+|-)[\d\W]+)/)[1]);
                 if (line.match(/Wind Affinity ((\+|-)[\d\W]+)/)) stats["affinitywlpercent"] = parseToPercent(line.match(/Wind Affinity ((\+|-)[\d\W]+)/)[1]);
                 if (line.match(/Light Affinity ((\+|-)[\d\W]+)/)) stats["affinitylightpercent"] = parseToPercent(line.match(/Light Affinity ((\+|-)[\d\W]+)/)[1]);
-                if (line.match(/Dark Affinity ((\+|-)[\d\W]+)/)) stats["affinitydarkpercent"] = parseToPercent(line.match(/Dark Affinity ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/(Dark|Darkness) Affinity ((\+|-)[\d\W]+)/)) stats["affinitydarkpercent"] = parseToPercent(line.match(/(Dark|Darkness) Affinity ((\+|-)[\d\W]+)/)[2]);
                 if (line.match(/Revival Time ((\+|-)[\d\W]+)/)) stats["revivaltimepercent"] = parseToPercent(line.match(/Revival Time ((\+|-)[\d\W]+)/)[1]);
             }
 
