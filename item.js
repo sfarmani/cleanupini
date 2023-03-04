@@ -28,7 +28,7 @@ void (async () => {
             else if (line.match(/Name = /)) {
                 if (line.match(/\|c[0-9a-z]{2}/i)) {
                     prop["name"] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[3];
-                    prop["color"] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[2];
+                    prop["color"] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[2].toUpperCase();
                 }
                 else prop["name"] = line.match(/\"(.*)?\"/)[1];
             }
