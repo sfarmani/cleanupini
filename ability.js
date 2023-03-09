@@ -12,7 +12,7 @@ void (async () => {
     ini_files.each(async function (file) {
         if (!file.match(/ability/)) return;
 
-        var str = []; var prop = {}; var context; var description = [];
+        var str = []; var prop = {}; var context; var description = []; var prev_line;
 
         const rl = readline.createInterface({
             input: fs.createReadStream(file),
@@ -123,9 +123,11 @@ void (async () => {
                 if (line.match(/Ubertip = \"\"/)) return;
                 if (line.match(/= {|= \[=\[/)) context = "description";
                 else if (context === "description") {
-                    if (!line) return;
+                    if (!line && prev_line) context = "";
+                    else if (!line) return;
                     if (line.match(/-- /)) context = "";
-                    else description.push(line.replace(/\|c[0-9a-z]{8}|\]=\]|\[=\[|\|r|\}|∴/g, ''));
+                    else description.push(line.replace(/\|c[0-9a-z]{8}|\]=\]|,$|\[=\[|\|r|\}|∴/g, ''));
+                    prev_line = line.match(/\]=\]/);
                 }
                 else {
                     description.push(line.match(/= \"(.*)?\"/)[1]);
