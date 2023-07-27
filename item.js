@@ -49,7 +49,7 @@ void (async () => {
                 prop["type"] = line.match(/Grade (.*)? -/)[1];
             }
             else if (context === "description") {
-                prop["description"] = line.match(/(.*)?/)[1].replace(/\|c[0-9a-z]{8}/g, '');
+                prop["description"] = line.match(/(.*)?/)[1].replace(/\|c[0-9a-z]{8}/ig, '');
                 context = "";
             }
             else if (line.match(/\|c0040e0d0∴|\|c00adff2f◎/)) {

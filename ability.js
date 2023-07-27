@@ -126,7 +126,7 @@ void (async () => {
                     if (!line && prev_line) context = "";
                     else if (!line) return;
                     if (line.match(/-- /)) context = "";
-                    else description.push(line.replace(/\|c[0-9a-z]{8}|\]=\]|,$|\[=\[|\|r|\}|∴/g, ''));
+                    else description.push(line.replace(/\|c[0-9a-z]{8}|\]=\]|,$|\[=\[|\|r|\}|∴/ig, ''));
                     prev_line = line.match(/\]=\]/);
                 }
                 else {
