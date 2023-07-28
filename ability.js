@@ -53,14 +53,14 @@ void (async () => {
                 else prop["buff_id"] = line.match(/\"(.*)?\"/)[1];
             }
             else if (line.match(/^Tip =/)) {
-                if (!line.match(/\|c[0-9a-z]{2}/i)) return;
+                if (!line.match(/\|c[0-9a-zA-Z]{2}/i)) return;
 
                 if (line.match(/= {/)) context = "color";
                 else if (context === "color") {
-                    prop[context] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})/)[2];
+                    prop[context] = line.match(/\|(c[0-9a-zA-Z]{2})([0-9a-zA-Z]{6})/)[2];
                     context = "";
                 }
-                else prop["color"] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})/)[2];
+                else prop["color"] = line.match(/\|(c[0-9a-zA-Z]{2})([0-9a-zA-Z]{6})/)[2];
             }
             else if (line.match(/-- Armor Bonus/) || ["armor_bonus"].includes(context)) {
                 if (line.match(/-- /)) context = "armor_bonus";
@@ -126,7 +126,7 @@ void (async () => {
                     if (!line && prev_line) context = "";
                     else if (!line) return;
                     if (line.match(/-- /)) context = "";
-                    else description.push(line.replace(/\|c[0-9a-z]{8}|\]=\]|,$|\[=\[|\|r|\}|∴/ig, ''));
+                    else description.push(line.replace(/\|c[0-9a-zA-Z]{8}|\]=\]|,$|\[=\[|\|r|\}|∴/g, ''));
                     prev_line = line.match(/\]=\]/);
                 }
                 else {

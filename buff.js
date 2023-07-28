@@ -25,8 +25,8 @@ void (async () => {
             }
             else if (line.match(/Name = |Bufftip = /)) {
                 if (line.match(/\|c[0-9a-z]{2}/i)) {
-                    prop["color"] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})/i)[2];
-                    prop["name"] = line.match(/\|(c[0-9a-z]{8})(.*)?(\|r)/i)[2];
+                    prop["color"] = line.match(/\|(c[0-9a-zA-Z]{2})([0-9a-zA-Z]{6})/)[2];
+                    prop["name"] = line.match(/\|(c[0-9a-zA-Z]{8})(.*)?(\|r)/)[2];
                 }
                 else prop["name"] = line.match(/\"(.*)?\"/)[1];
             }
@@ -39,7 +39,7 @@ void (async () => {
                 else if (context === "description") {
                     if (!line) return;
                     if (line.match(/-- /)) context = "";
-                    else description.push(line.replace(/\|c[0-9a-z]{8}|\]=\]|\[=\[|\|r|\}|∴/ig, ''));
+                    else description.push(line.replace(/\|c[0-9a-zA-Z]{8}|\]=\]|\[=\[|\|r|\}|∴/g, ''));
                 }
                 else {
                     description.push(line.match(/= \"(.*)?\"/)[1]);

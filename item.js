@@ -26,9 +26,9 @@ void (async () => {
                 prop["id"] = line.replace(/\[|\]/g, '');
             }
             else if (line.match(/Name = /)) {
-                if (line.match(/\|c[0-9a-z]{2}/i)) {
-                    prop["name"] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[3];
-                    prop["color"] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[2].toUpperCase();
+                if (line.match(/\|c[0-9a-zA-Z]{2}/i)) {
+                    prop["name"] = line.match(/\|(c[0-9a-zA-Z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[3];
+                    prop["color"] = line.match(/\|(c[0-9a-zA-Z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[2].toUpperCase();
                 }
                 else prop["name"] = line.match(/\"(.*)?\"/)[1];
             }
@@ -47,16 +47,16 @@ void (async () => {
                 if (line.match(/Arcana/)) prop["grade"] = 5;
 
                 prop["type"] = line.match(/Grade (.*)? -/)[1];
-                prop["color"] = line.match(/\|(c[0-9a-z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[2].toUpperCase();
+                prop["color"] = line.match(/\|(c[0-9a-zA-Z]{2})([0-9a-zA-Z]{6})([\w\W+\d]+)\|/i)[2].toUpperCase();
             }
             else if (context === "description") {
-                prop["description"] = line.match(/(.*)?/)[1].replace(/\|c[0-9a-z]{8}/ig, '');
+                prop["description"] = line.match(/(.*)?/)[1].replace(/\|c[0-9a-zA-Z]{8}/g, '');
                 context = "";
             }
             else if (line.match(/\|(c0040e0d0|c002040f0)∴|\|c00adff2f◎/)) {
                 if (!line.match(/Lv\./i)) {
-                    if (!stats["activepassive"]) stats["activepassive"] = [line.match(/(\|c[0-9a-z]{8}(∴|◎)(\|c[0-9a-z]{8})?)?(.*)?/ig)[4]];
-                    else stats["activepassive"].push(line.match(/(\|c[0-9a-z]{8}(∴|◎)(\|c[0-9a-z]{8})?)?(.*)?/ig)[4]);
+                    if (!stats["activepassive"]) stats["activepassive"] = [line.match(/(\|c[0-9a-zA-Z]{8}(∴|◎)(\|c[0-9a-zA-Z]{8})?)?(.*)?/)[4]];
+                    else stats["activepassive"].push(line.match(/(\|c[0-9a-zA-Z]{8}(∴|◎)(\|c[0-9a-zA-Z]{8})?)?(.*)?/)[4]);
                 }
             }
             else if (line.match(/Lv\./i)) {
