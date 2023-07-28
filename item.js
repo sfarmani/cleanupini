@@ -53,10 +53,10 @@ void (async () => {
                 prop["description"] = line.match(/(.*)?/)[1].replace(/\|c[0-9a-z]{8}/ig, '');
                 context = "";
             }
-            else if (line.match(/\|c0040e0d0∴|\|c00adff2f◎/)) {
+            else if (line.match(/(\|c[0-9a-z]{8}(∴|◎)(\|c[0-9a-z]{8})?)?(.*)?/ig)) {
                 if (!line.match(/Lv\./i)) {
-                    if (!stats["activepassive"]) stats["activepassive"] = [line.match(/(\|c[0-9a-z]{8}(∴|◎)(\|c[0-9a-z]{8})?)?(.*)?/)[4]];
-                    else stats["activepassive"].push(line.match(/(\|c[0-9a-z]{8}(∴|◎)(\|c[0-9a-z]{8})?)?(.*)?/)[4]);
+                    if (!stats["activepassive"]) stats["activepassive"] = [line.match(/(\|c[0-9a-z]{8}(∴|◎)(\|c[0-9a-z]{8})?)?(.*)?/ig)[4]];
+                    else stats["activepassive"].push(line.match(/(\|c[0-9a-z]{8}(∴|◎)(\|c[0-9a-z]{8})?)?(.*)?/ig)[4]);
                 }
             }
             else if (line.match(/Lv\./i)) {
