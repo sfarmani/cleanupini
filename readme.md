@@ -4,7 +4,7 @@ its meant for [w3x2lni](https://github.com/sumneko/w3x2lni) extracted ini files
 
 Namely: `ability.ini`, `item.ini`, `unit.ini`, `buff.ini`
 
-Place your ini files inside the `ini_files`
+Place your ini files inside the `ini_files` folder
 
 the `movefiles.js` moves the files to a specific directory.
 
