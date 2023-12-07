@@ -5,7 +5,7 @@ const _ = require('underscore');
 
 const path = './ini_files';
 
-const stat_regex = /(Damage |STR |AGI |INT |Auto-attack Damage |HP |MP |Armor |Main Stat |All Stats |Attack Speed |Movement Speed |Dodge Chance |Skill Damage |Crit Chance |Crit Multiplier |Periodic Damage |Magic Defense |Damage Reduction |Damage Taken |Healing Done |Healing Received |HP regen |MP regen |Affinity |EXP Gain |Revival Time )(\+|-)/i
+const stat_regex = /(Damage |STR |AGI |INT |Proc Damage |Auto-attack Damage |HP |MP |Armor |Main Stat |All Stats |Attack Speed |Movement Speed |Dodge Chance |Skill Damage |Crit Chance |Crit Multiplier |Periodic Damage |Magic Defense |Damage Reduction |Damage Taken |Healing Done |Healing Received |HP regen |MP regen |Affinity |EXP Gain |Revival Time )(\+|-)/i
 
 void (async () => {
     const ini_files = FileHound.create().paths(path).ext('ini').find();
@@ -65,6 +65,7 @@ void (async () => {
             else if (line.match(stat_regex)) {
                 if (line.match(/∴(Attack Damage|Damage) ((\+|-)[\d\W]+)/)) stats["damage"] = parseToNumber(line.match(/∴(Attack Damage|Damage) ((\+|-)[\d\W]+)/)[2]);
                 if (line.match(/Auto-attack Damage ((\+|-)[\d\W]+)/)) stats["aadamagepercent"] = parseToPercent(line.match(/Auto-attack Damage ((\+|-)[\d\W]+)/)[1]);
+                if (line.match(/Proc Damage ((\+|-)[\d\W]+)/)) stats["procdamagepercent"] = parseToPercent(line.match(/Proc Damage ((\+|-)[\d\W]+)/)[1]);
                 if (line.match(/Armor ((\+|-)[\d\W]+)/)) stats["armor"] = parseToNumber(line.match(/Armor ((\+|-)[\d\W]+)/)[1]);
                 if (line.match(/Main Stat ((\+|-)[\d\W]+)/)) stats["mainstat"] = parseToNumber(line.match(/Main Stat ((\+|-)[\d\W]+)/)[1]);
                 if (line.match(/All Stats ((\+|-)[\d\W]+)/)) stats["allstat"] = parseToNumber(line.match(/All Stats ((\+|-)[\d\W]+)/)[1]);
